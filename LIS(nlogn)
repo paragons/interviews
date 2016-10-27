@@ -1,0 +1,33 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int t,n,a[1005];
+    cin>>t;
+    while(t--){
+        cin>>n;
+        for(int i=0;i<n;i++)
+            cin>>a[i];
+        int dp[n+1];
+        memset(dp,0,sizeof(dp));
+        int sz=1;
+        dp[1]=a[0];
+        for(int i=1;i<n;i++){
+            if(a[i]<dp[1]){
+                dp[1]=a[i];
+            }
+            else if(a[i]>dp[sz]){
+                dp[sz+1]=a[i];
+                sz++;
+            }
+            else{
+                int it = lower_bound(dp+1,dp+sz+1,a[i])-dp;
+                dp[it]=a[i];
+            }
+        }
+        cout<<sz<<endl;
+    }
+    
+	return 0;
+}
