@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+#define mod 1000000007
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    int n,tmp;
+	    cin>>n;
+	    int i=1,a=1,b=1;
+	    for(;i<n;i++){
+	        tmp = a%mod;
+	        a = (a+b)%mod;
+	        b = tmp;
+	    }
+	    cout<<(a+b)%mod<<endl;
+	}
+	return 0;
+}
