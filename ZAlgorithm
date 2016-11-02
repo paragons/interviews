@@ -1,0 +1,39 @@
+/* The function should return position where the target string 
+   matches the string str
+Your are required to complete this method */
+void constructZ(string s,int* z){
+    int L=-1,R=-1,i;
+    for(i=1;i<s.length();i++){
+        if(i>R){
+            L=R=i;
+            while(R<s.length() and s[R]==s[R-L])
+                R++;
+            z[i]=R-L;
+            R--;
+        }
+        else{
+            int k=i-L;
+            if(z[k]<R-i+1)
+                z[i]=z[k];
+            else{
+            L=i;
+            while(R<s.length() and s[R]==s[R-L])
+                R++;
+            z[i]=R-L;
+            R--;
+            }
+        }
+    }
+}
+int strstr(string s, string x)
+{
+    int ret=-1;
+    int i,j;
+    string conc = x+'$'+s;
+    int z[conc.length()+5];
+    constructZ(conc,z);
+    for(int i=x.length()+1;i<conc.length();i++)
+        if(z[i]==x.length())
+            return i-x.length()-1;
+    return -1;
+}
